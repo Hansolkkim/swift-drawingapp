@@ -61,7 +61,7 @@ class DrawableAreaView: UIView {
                 delegate?.drawableAreaViewDidBeginPan(self)
                 
             case .changed:
-                guard let movingTemporaryView = movingTemporaryView else {return}
+                guard let movingTemporaryView = movingTemporaryView as? Movable else {return}
                 movingTemporaryView.move(distance: tanslation)
                 sender.setTranslation(.zero, in: self)
                 
@@ -99,7 +99,10 @@ class DrawableAreaView: UIView {
     }
     
     func updateSelectedView(backgroundColor: UIColor) {
-        self.selectedView?.changeBackgroundColor(to: backgroundColor)
+        guard let selectedView = selectedView as? ViewBackgroundColorChangable else {
+            return
+        }
+        selectedView.changeBackgroundColor(to: backgroundColor)
     }
     
     func updateSelectedView(alpha: CGFloat) {

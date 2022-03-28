@@ -7,20 +7,36 @@
 
 import UIKit
 
-protocol RectangleViewable {
+protocol RectangleViewable: BoundaryExpressable, Movable, Copyable, Resizable{
     var alpha: CGFloat {get}
     var frame: CGRect {get}
+    func changeAlphaValue(to newAlphaValue: CGFloat)
+}
+
+protocol BoundaryExpressable {
     func hideBoundary()
     func showBoundary()
+}
+
+protocol ViewBackgroundColorChangable {
+    var backgroundColor: UIColor? {get set}
     func changeBackgroundColor(to newColor: UIColor)
-    func changeAlphaValue(to newAlphaValue: CGFloat)
+}
+
+protocol Movable {
     func move(distance: CGPoint)
     func move(to newPoint: CGPoint)
+}
+
+protocol Copyable {
     func copy() -> RectangleViewable
+}
+
+protocol Resizable {
     func resize(to newSize: (width: CGFloat, height: CGFloat))
 }
 
-class RectangleView: UIView, RectangleViewable {
+class RectangleView: UIView, RectangleViewable, ViewBackgroundColorChangable {
     
     override var description: String {
         return "Frame = \(frame); alpha = \(alpha); backgroundColor = \(backgroundColor ?? .white)"

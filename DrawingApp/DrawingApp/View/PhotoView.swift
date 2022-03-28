@@ -36,10 +36,6 @@ class PhotoView: UIImageView, RectangleViewable {
         self.layer.borderColor = UIColor.black.cgColor
     }
     
-    func changeBackgroundColor(to newColor: UIColor) {
-        self.backgroundColor = newColor
-    }
-    
     func changeAlphaValue(to newAlphaValue: CGFloat) {
         self.alpha = newAlphaValue
     }
